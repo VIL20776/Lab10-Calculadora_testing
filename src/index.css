@@ -1,0 +1,43 @@
+body {
+    background-color: darkblue;
+}
+
+#calc {
+    border-radius: 25px;
+    background-color: cyan;
+    padding: 15px;
+    margin: auto;
+    width: 200px;
+    height: 350px;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+}
+
+#resultDisplay input{
+    text-align: right;
+    width: 100%;
+}
+
+#numberKeyboard {
+    float: left;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    min-width: 100px;
+}
+
+button {
+    display: inline-block;
+    width: 100%;
+    font-size: 30px;
+}
+
+button.wideButton {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+#operationKeyboard {
+    /* float: right; */
+    display: grid;
+    grid-template-columns: auto auto;
+}

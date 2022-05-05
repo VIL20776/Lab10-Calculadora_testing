@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import {
+  modulo, division, multiplicacion, resta, suma,
+} from '../operations/operations'
 
 export default function Calc() {
   const [entry, setEntry] = useState(0) // entrada numerica
@@ -44,43 +47,23 @@ export default function Calc() {
     let value = entry
     switch (operator) {
       case '+':
-        if (display.indexOf('.') > -1) {
-          if (value === 0) { value = parseFloat(display) } else value += parseFloat(display)
-        }
-        if (display.indexOf('.') === -1) {
-          if (value === 0) { value = parseInt(display, 10) } else value += parseInt(display, 10)
-        }
+        value = suma(display, value)
         break
 
       case '-':
-        if (display.indexOf('.') > -1) {
-          if (value === 0) { value = parseFloat(display) } else value -= parseFloat(display)
-        }
-        if (display.indexOf('.') === -1) {
-          if (value === 0) { value = parseInt(display, 10) } else value -= parseInt(display, 10)
-        }
+        value = resta(display, value)
         break
 
       case '*':
-        if (display.indexOf('.') > -1) {
-          if (value === 0) { value = parseFloat(display) } else value *= parseFloat(display)
-        }
-        if (display.indexOf('.') === -1) {
-          if (value === 0) { value = parseInt(display, 10) } else value *= parseInt(display, 10)
-        }
+        value = multiplicacion(display, value)
         break
 
       case '/':
-        if (value === 0) { value = parseFloat(display) } else value /= parseFloat(display)
+        value = division(display, value)
         break
 
       case '%':
-        if (display.indexOf('.') > -1) {
-          if (value === 0) { value = parseFloat(display) } else value %= parseFloat(display)
-        }
-        if (display.indexOf('.') === -1) {
-          if (value === 0) { value = parseInt(display, 10) } else value %= parseInt(display, 10)
-        }
+        value = modulo(display, value)
         break
 
       case '=':
@@ -101,20 +84,21 @@ export default function Calc() {
     for (let i = 9; i >= 1; i -= 1) {
       buttons.push(<button type="button" onClick={() => handleNumberClick(i)}>{i}</button>)
     }
-    buttons.push(<button type="button" className="zero" onClick={() => handleNumberClick(0)}>0</button>)
-    buttons.push(<button type="button">.</button>)
+    buttons.push(<button type="button" className="wideButton" onClick={() => handleNumberClick(0)}>0</button>)
+    buttons.push(<button type="button" on onClick={() => handleNumberClick('.')}>.</button>)
     return buttons
   }
 
   return (
     <>
       <div id="resultDisplay">
-        <input type="text" value={display} readOnly />
+        <input type="text" value={display} placeHolder="0" readOnly />
       </div>
       <div id="numberKeyboard">
         {generateNumberButtons()}
       </div>
-      <div id="operationKeboard">
+      <div id="operationKeyboard">
+        <button type="button" className="wideButton">C</button>
         {
           operations.map(
             (op) => <button type="button" onClick={() => handleOperatorClick(op)}>{op}</button>,
