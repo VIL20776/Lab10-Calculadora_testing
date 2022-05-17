@@ -121,7 +121,7 @@ export default function Calc() {
 
   return (
     <>
-      <div id="resultDisplay">
+      <div id="resultDisplay" data-testid="test-display">
         <input type="text" value={display} placeholder="0" readOnly />
       </div>
       <div id="numberKeyboard">
