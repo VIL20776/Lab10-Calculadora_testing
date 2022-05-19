@@ -105,30 +105,30 @@ export default function Calc() {
   function generateNumberPadButtons() { // Genera los botones del pad numerico
     const buttons = []
     for (let i = 9; i >= 0; i -= 1) {
-      buttons.push(<button type="button" onClick={() => handleNumberPadClick(i)}>{i}</button>)
+      buttons.push(<button type="button" data-testid={`test-numBtn-${i}`} onClick={() => handleNumberPadClick(i)}>{i}</button>)
     }
-    buttons.push(<button type="button" onClick={() => handleNumberPadClick('.')}>.</button>)
-    buttons.push(<button type="button" onClick={() => handleNumberPadClick('-')}>+/-</button>)
+    buttons.push(<button type="button" data-testid="test-dotBtn" onClick={() => handleNumberPadClick('.')}>.</button>)
+    buttons.push(<button type="button" data-testid="test-signBtn" onClick={() => handleNumberPadClick('-')}>+/-</button>)
     return buttons
   }
 
   function generateOperationPadButtons() { // Genera los botones del pad de operaciones
     const operations = Array.from('+-*/%=')
     return operations.map(
-      (op) => <button type="button" onClick={() => handleOperatorClick(op)}>{op}</button>,
+      (op) => <button type="button" data-testid={`test-opBtn-${op}`} onClick={() => handleOperatorClick(op)}>{op}</button>,
     )
   }
 
   return (
     <>
       <div id="resultDisplay" data-testid="test-display">
-        <input type="text" value={display} placeholder="0" readOnly />
+        <input type="text" data-testid="test-screen" value={display} placeholder="0" readOnly />
       </div>
       <div id="numberKeyboard">
         {generateNumberPadButtons()}
       </div>
       <div id="operationKeyboard">
-        <button type="button" className="wideButton" onClick={() => handleClearClick()}>C</button>
+        <button type="button" className="wideButton" data-testid="test-clearBtn" onClick={() => handleClearClick()}>C</button>
         {generateOperationPadButtons()}
       </div>
     </>
